@@ -37,6 +37,10 @@ describe("Inventory Allocator class", () => {
 
   it("Should have methods", () => {
     expect(typeof inventoryAllocator.searchWarehouses).to.equal("function");
+    expect(typeof inventoryAllocator.isItemInWarehouse).to.equal("function");
+    expect(typeof inventoryAllocator.getMinNumberInOrderAndWarehouse).to.equal(
+      "function"
+    );
   });
 });
 
@@ -183,5 +187,16 @@ describe("Inventory Allocator helper functionality", () => {
     const warehouse = inventoryAllocator.warehouses[0].inventory;
 
     expect(inventoryAllocator.isItemInWarehouse("kiwi", warehouse)).to.be.false;
+  });
+
+  it("Should get the minimum number of items between the inventory and the order", () => {
+    const warehouseApples = inventoryAllocator.warehouses[3].inventory.apple;
+
+    expect(
+      inventoryAllocator.getMinNumberInOrderAndWarehouse(
+        inventoryAllocator.order,
+        warehouseApples
+      )
+    ).to.be.equal(1);
   });
 });

@@ -40,7 +40,9 @@ class InventoryAllocator {
       }
     });
 
-    return results;
+    const isOrderComplete = Object.keys(copyOfOrder).length === 0;
+
+    return isOrderComplete ? results : [];
   }
 }
 

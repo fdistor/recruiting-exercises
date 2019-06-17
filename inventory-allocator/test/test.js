@@ -76,8 +76,8 @@ describe("List Of Items Found functionality", () => {
   it("Should set the correct key and value", () => {
     listOfItemsFound.set("apple", 5);
 
-    const key = Object.keys(listOfItemsFound.list.name)[0];
-    const value = Object.value(listOfItemsFound.list.name)[0];
+    const key = Object.keys(listOfItemsFound.list["owd"])[0];
+    const value = Object.values(listOfItemsFound.list["owd"])[0];
 
     expect(key).to.equal("apple");
     expect(value).to.equal(5);
@@ -85,7 +85,7 @@ describe("List Of Items Found functionality", () => {
 
   it("Should return the list of items found in warehouse", () => {
     listOfItemsFound.set("apple", 5);
-    const list = listOfItemsFound.getListOfItems();
+    const list = listOfItemsFound.getItems();
 
     expect(list).to.deep.equal({ owd: { apple: 5 } });
   });

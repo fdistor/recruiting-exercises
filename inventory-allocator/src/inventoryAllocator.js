@@ -14,7 +14,7 @@ class InventoryAllocator {
 
     this.warehouses.forEach(warehouse => {
       const { name, inventory } = warehouse;
-      const listOfItemsFound = new ListOfItemsFound(name);
+      const listOfItemsFoundInWarehouse = new ListOfItemsFound(name);
 
       for (let item in copyOfOrder) {
         if (inventory[item]) {
@@ -23,7 +23,7 @@ class InventoryAllocator {
             inventory[item]
           );
 
-          listOfItemsFound.set(item, numberOfItemsFoundInInventory);
+          listOfItemsFoundInWarehouse.set(item, numberOfItemsFoundInInventory);
           copyOfOrder[item] = copyOfOrder[item] - numberOfItemsFoundInInventory;
 
           if (copyOfOrder[item] === 0) {
@@ -32,8 +32,9 @@ class InventoryAllocator {
         }
       }
 
-      const numberOfItemsInList = Object.keys(listOfItemsFound.list[name])
-        .length;
+      const numberOfItemsInList = Object.keys(
+        listOfItemsFoundInWarehouse.list[name]
+      ).length;
 
       if (numberOfItemsInList > 0) {
         results.push(listOfItemsFound.getItems());

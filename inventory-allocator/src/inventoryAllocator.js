@@ -8,6 +8,10 @@ class InventoryAllocator {
     });
   }
 
+  isItemInWarehouse(item, warehouse) {
+    return typeof warehouse[item] === "number";
+  }
+
   searchWarehouses() {
     const copyOfOrder = { ...this.order };
     let results = [];
@@ -17,7 +21,7 @@ class InventoryAllocator {
       const listOfItemsFoundInWarehouse = new ListOfItemsFound(name);
 
       for (let item in copyOfOrder) {
-        if (inventory[item]) {
+        if (this.isItemInWarehouse(item, inventory)) {
           const numberOfItemsFoundInInventory = Math.min(
             this.order[item],
             inventory[item]

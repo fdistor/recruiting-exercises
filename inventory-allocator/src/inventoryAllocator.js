@@ -12,6 +12,13 @@ class InventoryAllocator {
     return typeof warehouse[item] === "number";
   }
 
+  getMinNumberInOrderAndWarehouse(
+    numberOfItemsInOrder,
+    numberOfItemsInWareHouse
+  ) {
+    return Math.min(numberOfItemsInOrder, numberOfItemsInWareHouse);
+  }
+
   searchWarehouses() {
     const copyOfOrder = { ...this.order };
     let results = [];
@@ -22,13 +29,13 @@ class InventoryAllocator {
 
       for (let item in copyOfOrder) {
         if (this.isItemInWarehouse(item, inventory)) {
-          const numberOfItemsFoundInInventory = Math.min(
-            this.order[item],
+          const minNumberOfItem = this.getMinNumberInOrderAndWarehouse(
+            copyOfOrder[item],
             inventory[item]
           );
 
-          listOfItemsFoundInWarehouse.set(item, numberOfItemsFoundInInventory);
-          copyOfOrder[item] = copyOfOrder[item] - numberOfItemsFoundInInventory;
+          listOfItemsFoundInWarehouse.set(item, minNumberOfItem);
+          copyOfOrder[item] = copyOfOrder[item] - minNumberOfItem;
 
           if (copyOfOrder[item] === 0) {
             delete copyOfOrder[item];

@@ -1,7 +1,9 @@
 class InventoryAllocator {
   constructor(warehouses, order) {
-    this.order = order;
-    this.warehouses = warehouses;
+    this.order = { ...order };
+    this.warehouses = warehouses.map(inventory => {
+      return { ...inventory };
+    });
   }
 
   searchWarehouses() {}

@@ -91,7 +91,7 @@ describe("List Of Items Found functionality", () => {
   });
 });
 
-describe("Inventory Allocator functionality", () => {
+describe("Inventory Allocator searchWarehouses functionality", () => {
   let inventoryAllocator;
 
   beforeEach(() => {

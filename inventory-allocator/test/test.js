@@ -55,12 +55,12 @@ describe("List Of Items Found class", () => {
 
   it("Should initialize properties", () => {
     expect(typeof listOfItemsFound.list).to.equal("object");
-    expect(listOfItemsFound.list.name).to.deep.equal({});
+    expect(listOfItemsFound.list["owd"]).to.deep.equal({});
   });
 
   it("Should have methods", () => {
     expect(typeof listOfItemsFound.set).to.equal("function");
-    expect(listOfItemsFound.getItems).to.equal("function");
+    expect(typeof listOfItemsFound.getItems).to.equal("function");
   });
 });
 

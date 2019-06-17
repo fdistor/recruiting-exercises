@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const warehouses = require("../data/data.js");
 const InventoryAllocator = require("../src/inventoryAllocator.js");
+const ListOfItemsFound = require("../src/ListOfItemsFound.js");
 
 describe("Inventory Allocator class", () => {
   let inventoryAllocator;
@@ -36,6 +37,30 @@ describe("Inventory Allocator class", () => {
 
   it("Should have methods", () => {
     expect(typeof inventoryAllocator.searchWarehouses).to.equal("function");
+  });
+});
+
+describe("List Of Items Found class", () => {
+  let listOfItemsFound;
+
+  beforeEach(() => {
+    const name = "owd";
+
+    listOfItemsFound = new ListOfItemsFound(name);
+  });
+
+  it("Should exist", () => {
+    expect(listOfItemsFound).to.exist;
+  });
+
+  it("Should initialize properties", () => {
+    expect(typeof listOfItemsFound.list).to.equal("object");
+    expect(listOfItemsFound.list.name).to.deep.equal({});
+  });
+
+  it("Should have methods", () => {
+    expect(typeof listOfItemsFound.set).to.equal("function");
+    expect(listOfItemsFound.getItems).to.equal("function");
   });
 });
 

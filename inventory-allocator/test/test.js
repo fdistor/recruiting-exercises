@@ -163,3 +163,25 @@ describe("Inventory Allocator searchWarehouses functionality", () => {
     expect(inventoryAllocator.order).to.deep.equal({ apple: 1 });
   });
 });
+
+describe("Inventory Allocator helper functionality", () => {
+  let inventoryAllocator;
+
+  beforeEach(() => {
+    const order = { apple: 1 };
+
+    inventoryAllocator = new InventoryAllocator(warehouses, order);
+  });
+
+  it("Should return true if item is in warehouse", () => {
+    const warehouse = inventoryAllocator.warehouses[0].inventory;
+
+    expect(inventoryAllocator.isItemInWarehouse("apple", warehouse)).to.be.true;
+  });
+
+  it("Should return false if item is not in warehouse", () => {
+    const warehouse = inventoryAllocator.warehouses[0].inventory;
+
+    expect(inventoryAllocator.isItemInWarehouse("kiwi", warehouse)).to.be.false;
+  });
+});

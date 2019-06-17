@@ -41,6 +41,7 @@ describe("Inventory Allocator class", () => {
     expect(typeof inventoryAllocator.getMinNumberInOrderAndWarehouse).to.equal(
       "function"
     );
+    expect(typeof inventoryAllocator.updateNumberInOrder).to.equal("function");
   });
 });
 
@@ -194,9 +195,22 @@ describe("Inventory Allocator helper functionality", () => {
 
     expect(
       inventoryAllocator.getMinNumberInOrderAndWarehouse(
-        inventoryAllocator.order,
+        inventoryAllocator.order.apple,
         warehouseApples
       )
     ).to.be.equal(1);
+  });
+
+  it("Should update the number of an item in the order if item is in warehouse", () => {
+    const order = { orange: 3 };
+    const warehouseOranges = inventoryAllocator.warehouses[3].inventory.orange;
+    const minNumberOfOranges = inventoryAllocator.getMinNumberInOrderAndWarehouse(
+      order.orange,
+      warehouseOranges
+    );
+
+    expect(
+      inventoryAllocator.updateNumberInOrder("orange", minNumberOfOranges)
+    ).to.equal(2);
   });
 });

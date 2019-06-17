@@ -102,4 +102,12 @@ describe("Inventory Allocator functionality", () => {
 
     expect(inventoryAllocator.searchWarehouses()).to.deep.equal([]);
   });
+
+  it("Should not mutate order after searching warehouses", () => {
+    inventoryAllocator.order = { apple: 1 };
+
+    inventoryAllocator.searchWarehouses();
+
+    expect(inventoryAllocator.order).to.deep.equal({ apple: 1 });
+  });
 });

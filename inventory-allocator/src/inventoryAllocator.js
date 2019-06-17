@@ -37,7 +37,7 @@ class InventoryAllocator {
       ).length;
 
       if (numberOfItemsInList > 0) {
-        results.push(listOfItemsFound.getItems());
+        results.push(listOfItemsFoundInWarehouse.getItems());
       }
     });
 

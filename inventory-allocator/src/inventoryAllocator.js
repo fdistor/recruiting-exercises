@@ -29,6 +29,10 @@ class InventoryAllocator {
     }
   }
 
+  doesContainItems(object) {
+    return Object.keys(object).length !== 0;
+  }
+
   searchWarehouses() {
     const copyOfOrder = { ...this.order };
     let results = [];
@@ -50,18 +54,12 @@ class InventoryAllocator {
         }
       }
 
-      const numberOfItemsInList = Object.keys(
-        listOfItemsFoundInWarehouse.list[name]
-      ).length;
-
-      if (numberOfItemsInList > 0) {
-        results.push(listOfItemsFoundInWarehouse.getItems());
+      if (this.doesContainItems(listOfItemsFoundInWarehouse.getItems())) {
+        results.push(listOfItemsFoundInWarehouse.list);
       }
     });
 
-    const isOrderComplete = Object.keys(copyOfOrder).length === 0;
-
-    return isOrderComplete ? results : [];
+    return this.doesContainItems(copyOfOrder) ? [] : results;
   }
 }
 

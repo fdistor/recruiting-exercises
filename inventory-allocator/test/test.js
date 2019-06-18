@@ -96,9 +96,9 @@ describe("List Of Items Found functionality", () => {
 
   it("Should return the list of items found in warehouse", () => {
     listOfItemsFound.set("apple", 5);
-    const list = listOfItemsFound.getItems();
+    const list = listOfItemsFound.getItems()["owd"];
 
-    expect(list).to.deep.equal({ owd: { apple: 5 } });
+    expect(list).to.deep.equal({ apple: 5 });
   });
 });
 

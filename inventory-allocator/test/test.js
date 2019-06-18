@@ -47,6 +47,7 @@ describe("Inventory Allocator class", () => {
     expect(typeof inventoryAllocator.removeItemFromOrderIfAllFound).to.equal(
       "function"
     );
+    expect(typeof inventoryAllocator.doesContainItems).to.equal("function");
   });
 });
 
@@ -242,5 +243,31 @@ describe("Inventory Allocator helper functionality", () => {
     inventoryAllocator.removeItemFromOrderIfAllFound("apple", order);
 
     expect(order.apple).to.not.exist;
+  });
+
+  it("Should return true if an object contains items", () => {
+    const order = { apple: 1 };
+
+    expect(inventoryAllocator.doesContainItems(order)).to.be.true;
+  });
+
+  it("Should return false if an object does not contain items", () => {
+    const order = { apple: 3 };
+
+    const warehouseApples = inventoryAllocator.warehouses[3].inventory.apple;
+    const minNumberOfApples = inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse(
+      order.apple,
+      warehouseApples
+    );
+
+    inventoryAllocator.updateNumberOfItemInOrder(
+      "apple",
+      minNumberOfApples,
+      order
+    );
+
+    inventoryAllocator.removeItemFromOrderIfAllFound("apple", order);
+
+    expect(inventoryAllocator.doesContainItems(order)).to.be.false;
   });
 });

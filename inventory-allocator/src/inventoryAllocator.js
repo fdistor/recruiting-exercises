@@ -12,7 +12,7 @@ class InventoryAllocator {
     return typeof warehouse[item] === "number";
   }
 
-  getMinNumberInOrderAndWarehouse(
+  getMinNumberOfItemInOrderAndWarehouse(
     numberOfItemsInOrder,
     numberOfItemsInWareHouse
   ) {
@@ -29,7 +29,7 @@ class InventoryAllocator {
 
       for (let item in copyOfOrder) {
         if (this.isItemInWarehouse(item, inventory)) {
-          const minNumberOfItem = this.getMinNumberInOrderAndWarehouse(
+          const minNumberOfItem = this.getMinNumberOfItemInOrderAndWarehouse(
             copyOfOrder[item],
             inventory[item]
           );

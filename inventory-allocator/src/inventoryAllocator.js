@@ -33,7 +33,7 @@ class InventoryAllocator {
     return Object.keys(object).length !== 0;
   }
 
-  searchWarehouses() {
+  createShipment() {
     const copyOfOrder = { ...this.order };
     let results = [];
 

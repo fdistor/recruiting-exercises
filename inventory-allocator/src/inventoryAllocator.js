@@ -23,6 +23,12 @@ class InventoryAllocator {
     order[item] = order[item] - amountFoundInWarehouse;
   }
 
+  removeItemFromOrderIfAllFound(item, order) {
+    if (order[item] === 0) {
+      delete order[item];
+    }
+  }
+
   searchWarehouses() {
     const copyOfOrder = { ...this.order };
     let results = [];
@@ -40,10 +46,7 @@ class InventoryAllocator {
 
           listOfItemsFoundInWarehouse.set(item, minNumberOfItem);
           this.updateNumberOfItemInOrder(item, minNumberOfItem, copyOfOrder);
-
-          if (copyOfOrder[item] === 0) {
-            delete copyOfOrder[item];
-          }
+          this.removeItemFromOrderIfAllFound(item, copyOfOrder);
         }
       }
 

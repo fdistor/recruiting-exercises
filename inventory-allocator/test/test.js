@@ -208,12 +208,12 @@ describe("Inventory Allocator helper functionality", () => {
 
     const warehouseOranges = inventoryAllocator.warehouses[3].inventory.orange;
     const minNumberOfOranges = inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse(
-      order.orange,
+      inventoryAllocator.order.orange,
       warehouseOranges
     );
 
     inventoryAllocator.updateNumberOfItemInOrder("orange", minNumberOfOranges);
 
-    expect(inventoryAllocator.order).to.equal(2);
+    expect(inventoryAllocator.order.orange).to.equal(2);
   });
 });

@@ -17,8 +17,8 @@ describe("Inventory Allocator class", () => {
   });
 
   it("Should initialize properties", () => {
-    expect(inventoryAllocator.warehouses).to.deep.equal([]);
-    expect(inventoryAllocator.order).to.deep.equal({});
+    expect(inventoryAllocator.warehouses).to.be.empty;
+    expect(inventoryAllocator.order).to.be.empty;
   });
 
   it("Should not mutate properties if inputs change", () => {
@@ -36,18 +36,16 @@ describe("Inventory Allocator class", () => {
   });
 
   it("Should have methods", () => {
-    expect(typeof inventoryAllocator.createShipment).to.equal("function");
-    expect(typeof inventoryAllocator.isItemInWarehouse).to.equal("function");
-    expect(
-      typeof inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse
-    ).to.equal("function");
-    expect(typeof inventoryAllocator.updateNumberOfItemInOrder).to.equal(
+    expect(inventoryAllocator.createShipment).to.be.a("function");
+    expect(inventoryAllocator.isItemInWarehouse).to.be.a("function");
+    expect(inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse).to.be.a(
       "function"
     );
-    expect(typeof inventoryAllocator.removeItemFromOrderIfAllFound).to.equal(
+    expect(inventoryAllocator.updateNumberOfItemInOrder).to.be.a("function");
+    expect(inventoryAllocator.removeItemFromOrderIfAllFound).to.be.a(
       "function"
     );
-    expect(typeof inventoryAllocator.doesContainItems).to.equal("function");
+    expect(inventoryAllocator.doesContainItems).to.be.a("function");
   });
 });
 
@@ -65,13 +63,13 @@ describe("List Of Items Found class", () => {
   });
 
   it("Should initialize properties", () => {
-    expect(typeof listOfItemsFound.list).to.equal("object");
-    expect(listOfItemsFound.list["owd"]).to.deep.equal({});
+    expect(listOfItemsFound.list).to.be.an("object");
+    expect(listOfItemsFound.list["owd"]).to.be.empty;
   });
 
   it("Should have methods", () => {
-    expect(typeof listOfItemsFound.set).to.equal("function");
-    expect(typeof listOfItemsFound.getItems).to.equal("function");
+    expect(listOfItemsFound.set).to.be.a("function");
+    expect(listOfItemsFound.getItems).to.be.a("function");
   });
 });
 
@@ -112,19 +110,19 @@ describe("Inventory Allocator createShipment functionality", () => {
   });
 
   it("Should handle an empty order", () => {
-    expect(inventoryAllocator.createShipment()).to.deep.equal([]);
+    expect(inventoryAllocator.createShipment()).to.be.empty;
   });
 
   it("Should handle an empty warehouse list", () => {
     inventoryAllocator.warehouses = [];
 
-    expect(inventoryAllocator.createShipment()).to.deep.equal([]);
+    expect(inventoryAllocator.createShipment()).to.be.empty;
   });
 
   it("Should return no warehouses if items do not exist", () => {
     inventoryAllocator.order = { pear: 1, strawberry: 1 };
 
-    expect(inventoryAllocator.createShipment()).to.deep.equal([]);
+    expect(inventoryAllocator.createShipment()).to.be.empty;
   });
 
   it("Should retrieve from one warehouse if all items are found", () => {
@@ -157,13 +155,13 @@ describe("Inventory Allocator createShipment functionality", () => {
   it("Should return no warehouses if insufficient inventory", () => {
     inventoryAllocator.order = { orange: 6 };
 
-    expect(inventoryAllocator.createShipment()).to.deep.equal([]);
+    expect(inventoryAllocator.createShipment()).to.be.empty;
   });
 
   it("Should return no warehouses if not all items are found", () => {
     inventoryAllocator.order = { apple: 1, banana: 1, orange: 6 };
 
-    expect(inventoryAllocator.createShipment()).to.deep.equal([]);
+    expect(inventoryAllocator.createShipment()).to.be.empty;
   });
 
   it("Should not mutate order after searching warehouses", () => {
@@ -204,7 +202,7 @@ describe("Inventory Allocator helper functionality", () => {
         inventoryAllocator.order.apple,
         warehouseApples
       )
-    ).to.be.equal(1);
+    ).to.equal(1);
   });
 
   it("Should update the number of an item in the order if item is in warehouse", () => {

@@ -19,6 +19,10 @@ class InventoryAllocator {
     return Math.min(numberOfItemsInOrder, numberOfItemsInWareHouse);
   }
 
+  updateNumberOfItemInOrder(item, amountFoundInWarehouse, order) {
+    order[item] = order[item] - amountFoundInWarehouse;
+  }
+
   searchWarehouses() {
     const copyOfOrder = { ...this.order };
     let results = [];
@@ -35,7 +39,7 @@ class InventoryAllocator {
           );
 
           listOfItemsFoundInWarehouse.set(item, minNumberOfItem);
-          copyOfOrder[item] = copyOfOrder[item] - minNumberOfItem;
+          this.updateNumberOfItemInOrder(item, minNumberOfItem, copyOfOrder);
 
           if (copyOfOrder[item] === 0) {
             delete copyOfOrder[item];

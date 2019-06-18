@@ -41,7 +41,9 @@ describe("Inventory Allocator class", () => {
     expect(
       typeof inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse
     ).to.equal("function");
-    expect(typeof inventoryAllocator.updateNumberInOrder).to.equal("function");
+    expect(typeof inventoryAllocator.updateNumberOfItemInOrder).to.equal(
+      "function"
+    );
   });
 });
 
@@ -202,15 +204,16 @@ describe("Inventory Allocator helper functionality", () => {
   });
 
   it("Should update the number of an item in the order if item is in warehouse", () => {
-    const order = { orange: 3 };
+    inventoryAllocator.order = { orange: 7 };
+
     const warehouseOranges = inventoryAllocator.warehouses[3].inventory.orange;
     const minNumberOfOranges = inventoryAllocator.getMinNumberOfItemInOrderAndWarehouse(
       order.orange,
       warehouseOranges
     );
 
-    expect(
-      inventoryAllocator.updateNumberInOrder("orange", minNumberOfOranges)
-    ).to.equal(2);
+    inventoryAllocator.updateNumberOfItemInOrder("orange", minNumberOfOranges);
+
+    expect(inventoryAllocator.order).to.equal(2);
   });
 });

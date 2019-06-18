@@ -10,6 +10,6 @@ module.exports = class ListOfItemsFound {
   }
 
   getItems() {
-    return this.list;
+    return this.list[this.name];
   }
 };
